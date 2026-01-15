@@ -14,7 +14,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
         <div className="w-full md:w-1/3 welcome-fade" style={{ animationDelay: '0.2s' }}>
           <div className="relative group">
             <div className="absolute inset-0 bg-[#2DD4BF]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-            <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative z-10">
+            <div className="aspect-square md:aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative z-10">
               <img 
                 src={data.personalInfo.headshot} 
                 alt={data.personalInfo.name}

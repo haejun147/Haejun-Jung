@@ -4,7 +4,7 @@ import { CMSData } from './types';
 /**
  * HAJUN JUNG PORTFOLIO CONFIGURATION
  * Edit this file directly on GitHub to update your website content.
- * Images can be Unsplash URLs, hosted links, or base64 strings.
+ * Upload your images (headshot.jpg, memory1.jpg, etc.) to the same directory.
  */
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
@@ -12,7 +12,8 @@ export const INITIAL_CMS_DATA: CMSData = {
     role: "Ph.D. Candidate @ KAIST",
     email: "haejunjung@kaist.ac.kr",
     bio: "I'm Haejun, a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of “Learn to give,” I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for stopping by! 😄",
-    headshot: "/images/Profile.png",
+    // Changed to local relative path for GitHub upload
+    headshot: "./headshot.jpg", 
     linkedin: "https://linkedin.com/in/hajun-jung",
     github: "https://github.com/hajunj",
     cvUrl: "#" 
@@ -145,7 +146,8 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "m1",
       title: "Scientific Journey",
       date: "2024",
-      imageUrl: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
+      // Changed to local relative path for GitHub upload
+      imageUrl: "./memory1.jpg", 
       description: "Moments from research and academic collaborations."
     }
   ],
