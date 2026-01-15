@@ -14,7 +14,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     bio: "I'm Haejun, a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of “Learn to give,” I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for stopping by! 😄",
     // Changed to local relative path for GitHub upload
     headshot: "/Profile.png", 
-    linkedin: "https://linkedin.com/in/hajun-jung",
+    linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
     cvUrl: "#" 
   },
