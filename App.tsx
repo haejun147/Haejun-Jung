@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import About from './pages/About';
 import Research from './pages/Research';
@@ -28,7 +28,6 @@ const App: React.FC = () => {
   const handleUpdate = (newData: CMSData) => {
     setData(newData);
     localStorage.setItem('hajun_portfolio_cms', JSON.stringify(newData));
-    // Scroll to top on update
     window.scrollTo(0, 0);
   };
 
@@ -40,7 +39,15 @@ const App: React.FC = () => {
           <Route path="/research" element={<Research data={data} />} />
           <Route path="/cv" element={<CV data={data} />} />
           <Route path="/memory" element={<Memory data={data} />} />
-          <Route path="/admin" element={<Admin data={data} onUpdate={handleUpdate} />} />
+          
+          {/* Admin page is now directly accessible without a password */}
+          <Route 
+            path="/admin" 
+            element={<Admin data={data} onUpdate={handleUpdate} />} 
+          />
+          
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
     </Router>
