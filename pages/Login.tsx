@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
               <Lock className="text-emerald-500" size={28} />
             </div>
             <h2 className="text-2xl font-display font-bold text-white mb-2">Private Access</h2>
-            <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold">Admin Authentication Required</p>
+            <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold text-center">Admin credentials required to proceed</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -37,11 +37,11 @@ const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter Passcode"
-                className={`w-full bg-black border ${error ? 'border-red-500/50' : 'border-white/10'} rounded-lg p-4 text-center text-sm outline-none focus:border-emerald-500 transition-all tracking-[0.5em] font-bold`}
+                className={`w-full bg-black border ${error ? 'border-red-500/50' : 'border-white/10'} rounded-lg p-4 text-center text-sm outline-none focus:border-emerald-500 transition-all tracking-[0.3em] font-medium text-white placeholder:tracking-normal placeholder:font-normal`}
                 autoFocus
               />
               {error && (
-                <p className="text-red-500 text-[10px] mt-3 text-center uppercase font-bold tracking-widest">
+                <p className="text-red-500 text-[10px] mt-4 text-center uppercase font-bold tracking-widest animate-pulse">
                   {error}
                 </p>
               )}
@@ -50,14 +50,14 @@ const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
               type="submit"
               className="w-full bg-white text-black font-bold py-4 rounded-lg flex items-center justify-center group hover:bg-emerald-500 hover:text-white transition-all text-xs uppercase tracking-[0.2em]"
             >
-              Unlock Dashboard
+              Verify Identity
               <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
           
           <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-center text-zinc-600">
              <ShieldCheck size={14} className="mr-2" />
-             <span className="text-[10px] uppercase font-bold tracking-widest">End-to-End Encrypted Session</span>
+             <span className="text-[10px] uppercase font-bold tracking-widest">Secure Administrative Gateway</span>
           </div>
         </div>
       </div>

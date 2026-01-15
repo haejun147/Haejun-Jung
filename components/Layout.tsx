@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Linkedin, Mail, Settings } from 'lucide-react';
+import { Menu, X, Linkedin, Mail } from 'lucide-react';
 import { CMSData } from '../types';
 
 interface LayoutProps {
@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white selection:bg-emerald-500/30">
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,13 +46,6 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
                   {item.name}
                 </NavLink>
               ))}
-              <Link 
-                to="/admin" 
-                className="p-2 text-gray-400 hover:text-emerald-500 transition-colors"
-                title="Admin Panel"
-              >
-                <Settings size={16} />
-              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -85,13 +78,6 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
                   {item.name}
                 </NavLink>
               ))}
-              <NavLink
-                to="/admin"
-                onClick={() => setIsOpen(false)}
-                className="block text-sm font-bold tracking-widest uppercase text-gray-400"
-              >
-                Admin Panel
-              </NavLink>
             </div>
           </div>
         )}

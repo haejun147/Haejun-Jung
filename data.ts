@@ -1,17 +1,26 @@
 
 import { CMSData } from './types';
 
+/**
+ * HAJUN JUNG PORTFOLIO CONFIGURATION
+ * Edit this file on GitHub to update your website content.
+ * Images can be Unsplash URLs or base64 strings.
+ */
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
     name: "Hajun Jung",
     role: "Senior Computational Researcher",
     email: "hajun.jung@example.com",
+    // EDIT BIO HERE
     bio: "Passionate about pushing the boundaries of Human-Computer Interaction and Artificial Intelligence. Currently exploring how generative models can augment human creativity in scientific discovery.",
+    // HEADSHOT IMAGE URL
     headshot: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
     linkedin: "https://linkedin.com/in/hajun-jung",
     github: "https://github.com/hajunj",
-    cvUrl: ""
+    cvUrl: "" // Link to your hosted PDF CV
   },
+
+  // RESEARCH PAPERS & PROJECTS
   research: [
     {
       id: "1",
@@ -47,6 +56,8 @@ export const INITIAL_CMS_DATA: CMSData = {
       link: "#"
     }
   ],
+
+  // CURRICULUM VITAE
   cv: {
     education: [
       {
@@ -67,6 +78,8 @@ export const INITIAL_CMS_DATA: CMSData = {
       }
     ]
   },
+
+  // GALLERY / MEMORIES
   memories: [
     {
       id: "m1",
@@ -76,8 +89,10 @@ export const INITIAL_CMS_DATA: CMSData = {
       description: "Presenting our latest work on neural dynamics at the ICML conference."
     }
   ],
+
+  // THEME COLORS
   theme: {
-    primary: "#10B981",
+    primary: "#10B981", // Emerald 500
     secondary: "#059669",
     accent: "#34D399"
   }
