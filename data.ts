@@ -57,21 +57,20 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "w1",
       title: "Unpacking the Entrepreneurial Process after Failure: The Role of Attribution and Behavioral Responses to Entrepreneurial Failure",
       authors: "Kim, D., Jung, H., Chatterji, A., Kim, W., Cho, S.",
-      journal: "1st Revision at Strategic Entrepreneurship Journal (FT 50)",
+      journal: "Strategic Entrepreneurship Journal (FT 50)",
       category: "Entrepreneurship",
       description: "",
       date: "2024",
-      status: "under_review",
+      status: "under_2nd_review",
       link: "#"
     },
     {
       id: "w2",
       title: "Exploring the Potential and Limits of Large Language Models in Entrepreneurship Survey Research",
       authors: "Jung, H., Kim, W.",
-      journal: "Working Paper",
       category: "LLM",
       description: "",
-      date: "2024",
+      date: "2025",
       status: "working_paper",
       link: "#"
     },
@@ -79,10 +78,9 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "w3",
       title: "Predicting Consumer Preferences for New Product Development Using Large Language Models",
       authors: "Jung, H., Lee, J., Lee, S., Chung, D.",
-      journal: "Under Review",
       category: "AI",
       description: "",
-      date: "2024",
+      date: "2025",
       status: "under_review",
       link: "#"
     },
@@ -90,7 +88,6 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "w4",
       title: "Unveiling the Development Pattern of Artificial Intelligence in Education",
       authors: "Jung, H., Baek, S.",
-      journal: "Soon to be submitted",
       category: "AIEd",
       description: "",
       date: "2024",
@@ -105,22 +102,22 @@ export const INITIAL_CMS_DATA: CMSData = {
         id: "e1",
         title: "Ph.D in Business and Technology Management",
         institution: "KAIST",
-        period: "March 2023 - Present",
+        period: "2023 - Present",
         description: ""
       },
       {
         id: "e2",
         title: "M.S. in Business and Technology Management",
         institution: "KAIST",
-        period: "August 2022",
-        description: "Awarded High Honor."
+        period: "2020-2022",
+        description: "Graduated with Honors"
       },
       {
         id: "e3",
         title: "B.S. in School of Global Entrepreneurship and ICT",
         institution: "Handong Global University (HGU)",
-        period: "August 2020",
-        description: "Awarded Cum Laude."
+        period: "2014-2020",
+        description: "Graduated with Honors"
       }
     ],
     experience: [
@@ -136,7 +133,7 @@ export const INITIAL_CMS_DATA: CMSData = {
         title: "Research Assistant (RA)",
         institution: "Bluepoint Partners",
         period: "2022 - 2023",
-        description: "Founder meetings, deal sourcing, business plan review, investment report, pitching consulting."
+        description: "Conducted meetings with entrepreneurs, deal sourcing, IR review, writing investment report, and pitching consulting."
       }
     ]
   },
@@ -148,7 +145,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       date: "2024",
       // Changed to local relative path for GitHub upload
       imageUrl: "/Friends.png", 
-      description: "Moments with Lovely Friends."
+      description: "Moments with my Lovely Friends."
     }
   ],
 
