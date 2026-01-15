@@ -29,7 +29,6 @@ const About: React.FC<AboutProps> = ({ data }) => {
           <h1 className="text-7xl md:text-9xl font-display font-extrabold text-white leading-tight mb-8 tracking-tighter">
             <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">Welcome!</span>
           </h1>
-          <div className="h-1.5 w-24 bg-emerald-500 mb-10 rounded-full mx-auto md:mx-0"></div>
           <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed font-light max-w-2xl mx-auto md:mx-0">
             {data.personalInfo.bio}
           </p>
