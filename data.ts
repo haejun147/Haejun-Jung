@@ -9,10 +9,9 @@ import { CMSData } from './types';
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
     name: "Hajun Jung",
-    role: "Computational Researcher", // Removed 'Senior' prefix as requested
-    email: "hajun.jung@example.com",
+    email: "hajun.jung@kaist.ac.kr",
     // EDIT BIO HERE
-    bio: "Passionate about pushing the boundaries of Human-Computer Interaction and Artificial Intelligence. Currently exploring how generative models can augment human creativity in scientific discovery.",
+    bio: "Hello! I'm Haejun, a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of “Learn to give,” I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for stopping by! 😄",
     // HEADSHOT IMAGE URL
     headshot: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
     linkedin: "https://linkedin.com/in/hajun-jung",
