@@ -147,7 +147,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       title: "Scientific Journey",
       date: "2024",
       // Changed to local relative path for GitHub upload
-      imageUrl: "./memory1.jpg", 
+      imageUrl: "/Friends.png", 
       description: "Moments from research and academic collaborations."
     }
   ],
