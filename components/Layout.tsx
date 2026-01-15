@@ -24,9 +24,9 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20">
+          <div className="flex justify-between h-16 md:h-20">
             <div className="flex items-center">
-              <Link to="/" className="text-xl font-display font-bold hover:text-emerald-500 transition-colors">
+              <Link to="/" className="text-lg font-display font-bold hover:text-emerald-500 transition-colors tracking-tighter">
                 {data.personalInfo.name.toUpperCase()}
               </Link>
             </div>
@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
                   key={item.name}
                   to={item.path}
                   className={({ isActive }) =>
-                    `text-xs uppercase tracking-widest font-bold transition-colors hover:text-emerald-500 ${
+                    `text-[10px] uppercase tracking-widest font-bold transition-colors hover:text-emerald-500 ${
                       isActive ? 'text-emerald-500' : 'text-gray-400'
                     }`
                   }
@@ -54,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gray-400 hover:text-white"
               >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -70,7 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
-                    `block text-sm font-bold tracking-widest uppercase ${
+                    `block text-xs font-bold tracking-widest uppercase ${
                       isActive ? 'text-emerald-500' : 'text-gray-400 hover:text-white'
                     }`
                   }
@@ -83,26 +83,26 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
         )}
       </nav>
 
-      {/* Main Content - Reduced top padding from 20 to 16 */}
-      <main className="pt-16">
+      {/* Main Content */}
+      <main className="pt-16 md:pt-20">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-white/5 py-10">
+      <footer className="bg-black border-t border-white/5 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex space-x-8">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex space-x-6">
               <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-emerald-500 transition-colors">
-                <Linkedin size={22} />
+                <Linkedin size={18} />
               </a>
               <a href={`mailto:${data.personalInfo.email}`} className="text-gray-500 hover:text-emerald-500 transition-colors">
-                <Mail size={22} />
+                <Mail size={18} />
               </a>
             </div>
             
-            <div className="text-gray-600 text-[10px] uppercase tracking-[0.2em]">
-              &copy; {new Date().getFullYear()} {data.personalInfo.name}
+            <div className="text-gray-600 text-[9px] uppercase tracking-[0.2em]">
+              &copy; {new Date().getFullYear()} {data.personalInfo.name} | KAIST
             </div>
           </div>
         </div>

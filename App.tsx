@@ -9,8 +9,7 @@ import Memory from './pages/Memory';
 import { INITIAL_CMS_DATA } from './data';
 
 const App: React.FC = () => {
-  // The data is now strictly pulled from INITIAL_CMS_DATA in data.ts
-  // You can edit data.ts directly on GitHub to update the site content.
+  // Pulling data directly from data.ts
   const data = INITIAL_CMS_DATA;
 
   return (
@@ -21,8 +20,6 @@ const App: React.FC = () => {
           <Route path="/research" element={<Research data={data} />} />
           <Route path="/cv" element={<CV data={data} />} />
           <Route path="/memory" element={<Memory data={data} />} />
-          
-          {/* Fallback to home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

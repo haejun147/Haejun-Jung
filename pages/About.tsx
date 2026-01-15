@@ -8,12 +8,12 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ data }) => {
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 md:py-32 relative">
-      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-        {/* Headshot with sophisticated masking */}
-        <div className="w-full md:w-2/5 welcome-fade" style={{ animationDelay: '0.2s' }}>
+    <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 md:py-24 relative">
+      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        {/* Headshot */}
+        <div className="w-full md:w-1/3 welcome-fade" style={{ animationDelay: '0.2s' }}>
           <div className="relative group">
-            <div className="absolute inset-0 bg-emerald-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+            <div className="absolute inset-0 bg-[#2DD4BF]/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
             <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-900 border border-white/10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative z-10">
               <img 
                 src={data.personalInfo.headshot} 
@@ -26,17 +26,17 @@ const About: React.FC<AboutProps> = ({ data }) => {
 
         {/* Bio Side */}
         <div className="flex-1 text-center md:text-left welcome-fade">
-          <h1 className="text-6xl md:text-8xl font-display font-extrabold text-white leading-tight mb-6 tracking-tighter">
-            <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">Welcome!</span>
+          <div className="inline-block px-3 py-1 border border-[#2DD4BF]/30 rounded-full mb-6 bg-[#2DD4BF]/5">
+            <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#2DD4BF]">
+              {data.personalInfo.role}
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-display font-extrabold text-white leading-tight mb-6 tracking-tighter">
+            <span className="text-[#2DD4BF] drop-shadow-[0_0_15px_rgba(45,212,191,0.3)]">Welcome!</span>
           </h1>
-          <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed font-light max-w-2xl mx-auto md:mx-0">
+          <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light max-w-2xl mx-auto md:mx-0">
             {data.personalInfo.bio}
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
-             <div className="text-xs uppercase tracking-[0.3em] font-bold text-zinc-500">
-               {data.personalInfo.role}
-             </div>
-          </div>
         </div>
       </div>
     </div>

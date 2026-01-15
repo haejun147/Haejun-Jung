@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hajun Jung | Professional Researcher</title>
+    <title>Haejun Jung | KAIST Researcher</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,10 +19,6 @@
         min-height: 100vh;
       }
 
-      /* 
-         Luxury 3D Layered Curves Background
-         Mimics the provided image with rhythmic tiered plates and deep shadows.
-      */
       .bg-lux-texture {
         position: fixed;
         inset: 0;
@@ -37,7 +34,6 @@
         height: 300%;
         top: -100%;
         right: -100%;
-        /* Tiered shadow effect to mimic curved plates */
         background: repeating-radial-gradient(
           circle at 90% 40%,
           #111 0px,
@@ -53,7 +49,6 @@
         opacity: 0.85;
       }
 
-      /* Soft lighting to create 3D volume */
       .bg-lux-texture::after {
         content: "";
         position: absolute;
@@ -63,7 +58,6 @@
         pointer-events: none;
       }
 
-      /* Subtle noise for that premium paper/matte finish */
       .bg-noise {
         position: fixed;
         inset: 0;
@@ -83,15 +77,14 @@
         background: #000;
       }
       ::-webkit-scrollbar-thumb {
-        background: #059669;
+        background: #2dd4bf;
         border-radius: 10px;
       }
       .selection-green::selection {
-        background-color: #10b981;
+        background-color: #2dd4bf;
         color: #000000;
       }
       
-      /* Animation for hero text */
       .welcome-fade {
         animation: welcome-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
       }
@@ -116,7 +109,6 @@
     <div class="bg-lux-texture"></div>
     <div class="bg-noise"></div>
     <div id="root"></div>
-    <!-- Entry point script for the application -->
     <script type="module" src="./index.tsx"></script>
 </body>
 </html>
