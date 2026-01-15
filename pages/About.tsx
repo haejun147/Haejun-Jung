@@ -8,8 +8,8 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ data }) => {
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 md:py-40 relative">
-      <div className="flex flex-col md:flex-row items-center gap-16 md:gap-32">
+    <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 md:py-32 relative">
+      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
         {/* Headshot with sophisticated masking */}
         <div className="w-full md:w-2/5 welcome-fade" style={{ animationDelay: '0.2s' }}>
           <div className="relative group">
@@ -26,13 +26,13 @@ const About: React.FC<AboutProps> = ({ data }) => {
 
         {/* Bio Side */}
         <div className="flex-1 text-center md:text-left welcome-fade">
-          <h1 className="text-7xl md:text-9xl font-display font-extrabold text-white leading-tight mb-8 tracking-tighter">
+          <h1 className="text-6xl md:text-8xl font-display font-extrabold text-white leading-tight mb-6 tracking-tighter">
             <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">Welcome!</span>
           </h1>
           <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed font-light max-w-2xl mx-auto md:mx-0">
             {data.personalInfo.bio}
           </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+          <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
              <div className="text-xs uppercase tracking-[0.3em] font-bold text-zinc-500">
                {data.personalInfo.role}
              </div>

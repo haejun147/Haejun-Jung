@@ -3,13 +3,13 @@ import { CMSData } from './types';
 
 /**
  * HAJUN JUNG PORTFOLIO CONFIGURATION
- * Edit this file on GitHub to update your website content.
- * Images can be Unsplash URLs or base64 strings.
+ * Edit this file directly on GitHub to update your website content.
+ * Images can be Unsplash URLs, hosted links, or base64 strings.
  */
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
     name: "Hajun Jung",
-    role: "Senior Computational Researcher",
+    role: "Computational Researcher", // Removed 'Senior' prefix as requested
     email: "hajun.jung@example.com",
     // EDIT BIO HERE
     bio: "Passionate about pushing the boundaries of Human-Computer Interaction and Artificial Intelligence. Currently exploring how generative models can augment human creativity in scientific discovery.",
@@ -17,7 +17,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     headshot: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
     linkedin: "https://linkedin.com/in/hajun-jung",
     github: "https://github.com/hajunj",
-    cvUrl: "" // Link to your hosted PDF CV
+    cvUrl: "#" // Link to your hosted PDF CV
   },
 
   // RESEARCH PAPERS & PROJECTS
@@ -90,7 +90,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     }
   ],
 
-  // THEME COLORS
+  // THEME COLORS (Optional styling override)
   theme: {
     primary: "#10B981", // Emerald 500
     secondary: "#059669",
