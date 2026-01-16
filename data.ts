@@ -57,7 +57,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "w1",
       title: "Unpacking the Entrepreneurial Process after Failure: The Role of Attribution and Behavioral Responses to Entrepreneurial Failure",
       authors: "Kim, D., Jung, H., Chatterji, A., Kim, W., Cho, S.",
-      journal: "Strategic Entrepreneurship Journal (FT 50)",
+      journal: "Strategic Entrepreneurship Journal (FT-50)",
       category: "Entrepreneurship",
       description: "",
       date: "2024",
@@ -68,10 +68,11 @@ export const INITIAL_CMS_DATA: CMSData = {
       id: "w2",
       title: "Exploring the Potential and Limits of Large Language Models in Entrepreneurship Survey Research",
       authors: "Jung, H., Kim, W.",
+      journal: "FT-50 Journal",
       category: "LLM",
       description: "",
       date: "2025",
-      status: "working_paper",
+      status: "under_review",
       link: "#"
     },
     {
