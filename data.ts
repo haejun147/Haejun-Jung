@@ -101,14 +101,14 @@ export const INITIAL_CMS_DATA: CMSData = {
       {
         id: "e1",
         title: "Ph.D in Business and Technology Management",
-        institution: "KAIST",
+        institution: "Korea Advanced Institute of Science and Technology(KAIST)",
         period: "2023 - Present",
         description: ""
       },
       {
         id: "e2",
         title: "M.S. in Business and Technology Management",
-        institution: "KAIST",
+        institution: "Korea Advanced Institute of Science and Technology(KAIST)",
         period: "2020-2022",
         description: "Graduated with Honors"
       },
@@ -123,13 +123,19 @@ export const INITIAL_CMS_DATA: CMSData = {
     experience: [
       {
         id: "ex1",
+        title: "Visiting Student Researcher",
+        institution: "Massachusetts Institute of Technology(MIT)",
+        period: "2026 - present",
+      },
+      {
+        id: "ex2",
         title: "Chief Strategy Officer (CSO)",
         institution: "Flat Music",
         period: "2024 - 2025",
         description: "Customer experience innovation research and scale-up strategy formulation."
       },
       {
-        id: "ex2",
+        id: "ex3",
         title: "Research Assistant (RA)",
         institution: "Bluepoint Partners",
         period: "2022 - 2023",
