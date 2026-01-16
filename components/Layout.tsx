@@ -102,7 +102,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
             </div>
             
             <div className="text-gray-600 text-[9px] uppercase tracking-[0.2em]">
-              &copy; {new Date().getFullYear()} {data.personalInfo.name} | KAIST
+              &copy; {new Date().getFullYear()} {data.personalInfo.name}
             </div>
           </div>
         </div>
