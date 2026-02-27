@@ -51,7 +51,7 @@ const BlogPost: React.FC = () => {
           </div>
         </header>
 
-        <article className="prose prose-gray prose-headings:font-display prose-headings:font-bold prose-a:text-teal-700 prose-a:no-underline hover:prose-a:underline prose-code:before:content-none prose-code:after:content-none max-w-none">
+        <article className="prose prose-lg prose-gray prose-headings:font-display prose-headings:font-bold prose-a:text-teal-700 prose-a:no-underline hover:prose-a:underline prose-code:before:content-none prose-code:after:content-none prose-blockquote:border-teal-600 prose-blockquote:text-gray-700 prose-blockquote:not-italic prose-hr:my-14 prose-h2:mt-16 prose-h2:mb-6 prose-h3:mt-10 prose-h3:mb-4 prose-p:leading-[1.9] max-w-none">
           <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
             {post.content}
           </Markdown>
