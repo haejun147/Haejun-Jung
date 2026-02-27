@@ -15,6 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
   const navItems = [
     { name: 'About', path: '/' },
     { name: 'Research', path: '/research' },
+    { name: 'Blog', path: '/blog' },
     { name: 'CV', path: '/cv' },
   ];
 
@@ -22,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navbar */}
       <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
           <div className="flex justify-between h-24">
             <div className="flex items-center">
               <Link to="/" className="text-xl font-display font-bold text-gray-900 hover:text-teal-700 transition-colors">
@@ -89,7 +90,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
 
       {/* Footer */}
       <footer className="border-t border-gray-100 py-10">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
           <div className="flex flex-col items-center gap-4">
             <div className="flex space-x-5">
               <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-teal-700 transition-colors">

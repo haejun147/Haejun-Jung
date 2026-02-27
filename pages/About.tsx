@@ -1,7 +1,47 @@
 
-import React from 'react';
-import { Linkedin, Mail } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Linkedin, Mail, ChevronDown, GraduationCap, TrendingUp, Rocket, type LucideIcon } from 'lucide-react';
+
+function getInstitutionIcon(place: string): LucideIcon {
+  const p = place.toLowerCase();
+  if (p.includes('kaist')) return GraduationCap;
+  if (p.includes('hgu') || p.includes('handong')) return GraduationCap;
+  if (p.includes('mit') || p.includes('massachusetts')) return GraduationCap;
+  if (p.includes('flat') || p.includes('music')) return Rocket;
+  if (p.includes('bluepoint')) return TrendingUp;
+  return GraduationCap;
+}
+
+function getInstitutionLogo(place: string): { src: string; size: string } | null {
+  const p = place.toLowerCase();
+  if (p.includes('kaist')) return { src: '/kaist.png', size: 'w-40 h-40' };
+  if (p.includes('hgu') || p.includes('handong')) return { src: '/hgu.png', size: 'w-20 h-20' };
+  if (p.includes('mit') || p.includes('massachusetts')) return { src: '/mit.png', size: 'w-20 h-20' };
+  if (p.includes('flat') || p.includes('music')) return { src: '/flat.png', size: 'w-40 h-40' };
+  if (p.includes('bluepoint')) return { src: '/bluepoint.png', size: 'w-40 h-40' };
+  return null;
+}
 import { CMSData } from '../types';
+
+function useScrollReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('scroll-visible');
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
 
 interface AboutProps {
   data: CMSData;
@@ -30,10 +70,14 @@ const About: React.FC<AboutProps> = ({ data }) => {
   const publications = data.research.filter(r => r.status === 'publication');
   const workingPapers = data.research.filter(r => r.status !== 'publication');
 
+  const journeyRef = useScrollReveal<HTMLElement>();
+  const researchRef = useScrollReveal<HTMLElement>();
+
   return (
-    <div>
+    <div className="snap-container">
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto px-6 sm:px-8 py-16 md:py-28">
+      <section className="snap-section min-h-[calc(100vh-6rem)] flex flex-col justify-center">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 py-16 md:py-20">
         <div className="welcome-fade">
           {/* Name + Role — centered */}
           <div className="text-center mb-14 md:mb-20">
@@ -77,11 +121,23 @@ const About: React.FC<AboutProps> = ({ data }) => {
             </div>
           </div>
         </div>
+
+          {/* Scroll indicator */}
+          <div className="flex justify-center mt-12 md:mt-16">
+            <button
+              onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
+              className="scroll-indicator text-gray-300 hover:text-teal-600 transition-colors"
+              aria-label="Scroll to Journey"
+            >
+              <ChevronDown size={28} />
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* Journey Timeline */}
-      <section className="bg-gray-50/80 py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+      <section id="journey" ref={journeyRef} className="snap-section scroll-section min-h-screen bg-gray-50/80 py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
           <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-4 text-center">
             My Journey
           </h2>
@@ -91,21 +147,30 @@ const About: React.FC<AboutProps> = ({ data }) => {
 
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gray-200 md:-translate-x-px" />
+            <div className="absolute left-[2.15rem] md:left-1/2 top-0 bottom-0 w-px bg-gray-200 md:-translate-x-px" />
 
             <div className="space-y-12 md:space-y-16">
               {journeyItems.map((item, index) => {
                 const isLeft = index % 2 === 0;
+                const Icon = getInstitutionIcon(item.place);
+                const logo = getInstitutionLogo(item.place);
                 return (
                   <div key={index} className="relative flex items-start md:items-center">
-                    {/* Dot */}
-                    <div className="absolute left-6 md:left-1/2 w-3 h-3 bg-teal-600 rounded-full -translate-x-1.5 md:-translate-x-1.5 mt-1.5 md:mt-0 z-10 ring-4 ring-white" />
+                    {/* Icon */}
+                    <div className="absolute left-6 md:left-1/2 -translate-x-1/2 mt-0.5 md:mt-0 z-10 w-9 h-9 rounded-full bg-teal-600 ring-4 ring-white flex items-center justify-center">
+                      <Icon size={16} className="text-white" />
+                    </div>
 
                     {/* Content */}
-                    <div className={`ml-14 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:ml-auto'}`}>
-                      <span className="inline-block text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full mb-2">
-                        {item.year}
-                      </span>
+                    <div className={`ml-16 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:ml-auto'}`}>
+                      <div className={`flex items-center gap-2.5 mb-3 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
+                        <span className="inline-block text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full">
+                          {item.year}
+                        </span>
+                        {logo && (
+                          <img src={logo.src} alt={item.place} className="h-8 w-auto object-contain mix-blend-multiply" />
+                        )}
+                      </div>
                       <h3 className="text-base font-semibold text-gray-900 mb-1">{item.title}</h3>
                       <p className="text-sm text-teal-700/80 font-medium mb-1">{item.place}</p>
                       {item.description && (
@@ -121,8 +186,8 @@ const About: React.FC<AboutProps> = ({ data }) => {
       </section>
 
       {/* Research — narrative style */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-6 sm:px-8">
+      <section ref={researchRef} className="snap-section scroll-section min-h-screen py-20 md:py-28">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-16">
           <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-4 text-center">
             Research
           </h2>

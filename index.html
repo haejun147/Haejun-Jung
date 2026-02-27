@@ -4,7 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="/favicon.webp">
     <title>Haejun Jung</title>
+    <meta name="description" content="Haejun Jung — Ph.D. Candidate at KAIST. Research on entrepreneurship, technology innovation, and AI.">
+    <meta property="og:title" content="Haejun Jung">
+    <meta property="og:description" content="Ph.D. Candidate at KAIST — research on entrepreneurship, technology innovation, and AI.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.haejunjung.com">
+    <meta property="og:site_name" content="Haejun Jung">
+    <meta name="twitter:card" content="summary">
+    <link rel="alternate" type="application/rss+xml" title="Haejun Jung Blog" href="/rss.xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +58,32 @@
       @keyframes welcome-up {
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
+      }
+
+      .snap-container {
+        scroll-snap-type: y proximity;
+      }
+      .snap-section {
+        scroll-snap-align: start;
+      }
+
+      .scroll-indicator {
+        animation: bounce-down 2s ease-in-out infinite;
+      }
+      @keyframes bounce-down {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(8px); }
+      }
+
+      .scroll-section {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .scroll-section.scroll-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
 </head>

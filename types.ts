@@ -27,6 +27,16 @@ export interface MemoryPost {
   description: string;
 }
 
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+  published: boolean;
+  content: string;
+}
+
 export interface CMSData {
   personalInfo: {
     name: string;
