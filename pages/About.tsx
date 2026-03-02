@@ -77,7 +77,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
 
           {/* Photo + Bio */}
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-stretch">
-            <div className="w-full md:w-[45%] flex-shrink-0">
+            <div className="w-full md:w-[32%] flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-2xl group cursor-pointer relative">
                 <img
                   src={data.personalInfo.headshot}
