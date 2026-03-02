@@ -22,8 +22,20 @@
     <meta property="og:site_name" content="Haejun Jung">
     <meta name="twitter:card" content="summary">
     <link rel="alternate" type="application/rss+xml" title="Haejun Jung Blog" href="/rss.xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+    <script>
+      // Anti-flicker: set dark class before paint
+      (function() {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+          var link = document.getElementById('hljs-theme');
+          if (link) link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
+        }
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -35,6 +47,10 @@
         margin: 0;
         overflow-x: hidden;
         min-height: 100vh;
+      }
+      .dark body {
+        background-color: #030712;
+        color: #f3f4f6;
       }
 
       .font-display {
@@ -54,10 +70,49 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #9ca3af;
       }
+      .dark ::-webkit-scrollbar-track {
+        background: #1f2937;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #4b5563;
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+      }
 
       ::selection {
         background-color: #0d9488;
         color: #ffffff;
+      }
+      .dark ::selection {
+        background-color: #14b8a6;
+        color: #030712;
+      }
+
+      .theme-transition,
+      .theme-transition *,
+      .theme-transition *::before,
+      .theme-transition *::after {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+      }
+
+      /* Dark prose overrides for blog content */
+      .dark .prose {
+        --tw-prose-body: #d1d5db;
+        --tw-prose-headings: #f3f4f6;
+        --tw-prose-links: #2dd4bf;
+        --tw-prose-bold: #f3f4f6;
+        --tw-prose-counters: #9ca3af;
+        --tw-prose-bullets: #6b7280;
+        --tw-prose-hr: #374151;
+        --tw-prose-quotes: #d1d5db;
+        --tw-prose-quote-borders: #14b8a6;
+        --tw-prose-captions: #9ca3af;
+        --tw-prose-code: #f3f4f6;
+        --tw-prose-pre-code: #d1d5db;
+        --tw-prose-pre-bg: #111827;
+        --tw-prose-th-borders: #4b5563;
+        --tw-prose-td-borders: #374151;
       }
 
       .welcome-fade {

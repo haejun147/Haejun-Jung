@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import About from './pages/About';
 import Research from './pages/Research';
@@ -14,18 +15,20 @@ const App: React.FC = () => {
   const data = INITIAL_CMS_DATA;
 
   return (
-    <Router>
-      <Layout data={data}>
-        <Routes>
-          <Route path="/" element={<About data={data} />} />
-          <Route path="/research" element={<Research data={data} />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/cv" element={<CV data={data} />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Layout data={data}>
+          <Routes>
+            <Route path="/" element={<About data={data} />} />
+            <Route path="/research" element={<Research data={data} />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/cv" element={<CV data={data} />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 };
 

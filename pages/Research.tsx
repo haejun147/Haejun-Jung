@@ -14,30 +14,30 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 md:py-24">
       <div className="mb-16 welcome-fade">
-        <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Research</h1>
-        <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
+        <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100 mb-4">Research</h1>
+        <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-2xl">
           My research examines entrepreneurial decision-making, technology innovation, and the application of AI in research methodology.
         </p>
       </div>
 
       {/* Publications */}
       <section className="mb-20 welcome-fade" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-8">Publications</h2>
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-8">Publications</h2>
         <div className="space-y-8">
-          {publications.length === 0 && <p className="text-gray-400 italic">No publications listed yet.</p>}
+          {publications.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No publications listed yet.</p>}
           {publications.map((project) => (
-            <div key={project.id} className="group pb-8 border-b border-gray-100 last:border-0">
+            <div key={project.id} className="group pb-8 border-b border-gray-100 dark:border-gray-800 last:border-0">
               <div className="flex justify-between items-start gap-4">
-                <h3 className="text-base font-semibold text-gray-900 group-hover:text-teal-700 transition-colors leading-snug">
+                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors leading-snug">
                   {project.title}
                 </h3>
                 {project.link && project.link !== '#' && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-teal-700 mt-0.5 transition-colors flex-shrink-0">
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-600 hover:text-teal-700 dark:hover:text-teal-400 mt-0.5 transition-colors flex-shrink-0">
                     <ExternalLink size={16} />
                   </a>
                 )}
               </div>
-              <div className="mt-2 text-sm text-gray-500 space-y-0.5">
+              <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 space-y-0.5">
                 <div>{project.authors}</div>
                 <div className="italic">{project.journal}, {project.date}</div>
               </div>
@@ -48,26 +48,26 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
 
       {/* Working Papers */}
       <section className="welcome-fade" style={{ animationDelay: '0.2s' }}>
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-8">Under Review & In Progress</h2>
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-8">Under Review & In Progress</h2>
         <div className="space-y-8">
-          {workingPapers.length === 0 && <p className="text-gray-400 italic">No working papers listed yet.</p>}
+          {workingPapers.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No working papers listed yet.</p>}
           {workingPapers.map((project) => (
-            <div key={project.id} className="group pb-8 border-b border-gray-100 last:border-0">
+            <div key={project.id} className="group pb-8 border-b border-gray-100 dark:border-gray-800 last:border-0">
               <div className="flex justify-between items-start gap-4">
-                <h3 className="text-base font-semibold text-gray-900 group-hover:text-teal-700 transition-colors leading-snug">
+                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors leading-snug">
                   {project.title}
                 </h3>
                 {project.link && project.link !== '#' && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-teal-700 mt-0.5 transition-colors flex-shrink-0">
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-600 hover:text-teal-700 dark:hover:text-teal-400 mt-0.5 transition-colors flex-shrink-0">
                     <ExternalLink size={16} />
                   </a>
                 )}
               </div>
-              <div className="mt-2 text-sm text-gray-500 space-y-0.5">
+              <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 space-y-0.5">
                 <div>{project.authors}</div>
                 <div className="flex items-center gap-3">
                   <span className="italic">{project.journal || 'Working Paper'}</span>
-                  <span className="text-[11px] text-teal-700/80 px-2 py-0.5 border border-teal-700/20 rounded-full bg-teal-50">
+                  <span className="text-[11px] text-teal-700/80 dark:text-teal-400/80 px-2 py-0.5 border border-teal-700/20 dark:border-teal-400/20 rounded-full bg-teal-50 dark:bg-teal-950">
                     {project.status === '2nd_r&r' ? '2nd R&R' : project.status.replace(/_/g, ' ')}
                   </span>
                 </div>
