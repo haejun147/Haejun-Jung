@@ -1,26 +1,8 @@
 
-import React, { useEffect, useRef } from 'react';
-import { Linkedin, Mail, ChevronDown, GraduationCap, TrendingUp, Rocket, type LucideIcon } from 'lucide-react';
-
-function getInstitutionIcon(place: string): LucideIcon {
-  const p = place.toLowerCase();
-  if (p.includes('kaist')) return GraduationCap;
-  if (p.includes('hgu') || p.includes('handong')) return GraduationCap;
-  if (p.includes('mit') || p.includes('massachusetts')) return GraduationCap;
-  if (p.includes('flat') || p.includes('music')) return Rocket;
-  if (p.includes('bluepoint')) return TrendingUp;
-  return GraduationCap;
-}
-
-function getInstitutionLogo(place: string): { src: string; size: string } | null {
-  const p = place.toLowerCase();
-  if (p.includes('kaist')) return { src: '/kaist.png', size: 'w-40 h-40' };
-  if (p.includes('hgu') || p.includes('handong')) return { src: '/hgu.png', size: 'w-20 h-20' };
-  if (p.includes('mit') || p.includes('massachusetts')) return { src: '/mit.png', size: 'w-20 h-20' };
-  if (p.includes('flat') || p.includes('music')) return { src: '/flat.png', size: 'w-40 h-40' };
-  if (p.includes('bluepoint')) return { src: '/bluepoint.png', size: 'w-40 h-40' };
-  return null;
-}
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { Linkedin, Mail, ChevronDown, ChevronLeft, ChevronRight, ImageIcon, Calendar } from 'lucide-react';
+import { getAllPosts } from '../lib/blog';
 import { CMSData } from '../types';
 
 function useScrollReveal<T extends HTMLElement>() {
@@ -43,35 +25,39 @@ function useScrollReveal<T extends HTMLElement>() {
   return ref;
 }
 
+function useCarousel(cardWidth: number) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+  const pauseTimeout = useRef<ReturnType<typeof setTimeout>>();
+
+  const scroll = useCallback((direction: 'left' | 'right') => {
+    const el = scrollRef.current;
+    if (!el) return;
+    // Pause auto-scroll temporarily when user clicks arrows
+    setPaused(true);
+    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+    pauseTimeout.current = setTimeout(() => setPaused(false), 3000);
+
+    const gap = 20; // gap-5 = 1.25rem = 20px
+    const shift = cardWidth + gap;
+    el.scrollBy({ left: direction === 'right' ? shift : -shift, behavior: 'smooth' });
+  }, [cardWidth]);
+
+  return { scrollRef, paused, setPaused, scroll };
+}
+
 interface AboutProps {
   data: CMSData;
 }
 
 const About: React.FC<AboutProps> = ({ data }) => {
-  // Build journey timeline from CV data
-  const journeyItems = [
-    ...data.cv.education.map(e => ({
-      year: e.period.split('-')[0].trim().replace('–', '').trim(),
-      title: e.title,
-      place: e.institution,
-      description: e.description,
-      type: 'education' as const,
-    })),
-    ...data.cv.experience.map(e => ({
-      year: e.period.split('-')[0].trim().replace('–', '').trim(),
-      title: e.title,
-      place: e.institution,
-      description: e.description,
-      type: 'experience' as const,
-    })),
-  ].sort((a, b) => parseInt(b.year) - parseInt(a.year));
+  const posts = getAllPosts().slice(0, 5);
 
-  // Research
-  const publications = data.research.filter(r => r.status === 'publication');
-  const workingPapers = data.research.filter(r => r.status !== 'publication');
+  const researchCarousel = useCarousel(384); // ~24rem
+  const blogCarousel = useCarousel(384);
 
-  const journeyRef = useScrollReveal<HTMLElement>();
   const researchRef = useScrollReveal<HTMLElement>();
+  const blogRef = useScrollReveal<HTMLElement>();
 
   return (
     <div className="snap-container">
@@ -79,7 +65,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
       <section className="snap-section min-h-[calc(100vh-6rem)] flex flex-col justify-center">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 py-16 md:py-20">
         <div className="welcome-fade">
-          {/* Name + Role — centered */}
+          {/* Name + Role */}
           <div className="text-center mb-14 md:mb-20">
             <h1 className="text-4xl md:text-[3.4rem] font-display font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
               {data.personalInfo.name}
@@ -89,9 +75,8 @@ const About: React.FC<AboutProps> = ({ data }) => {
             </p>
           </div>
 
-          {/* Photo left + Bio right */}
+          {/* Photo + Bio */}
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-stretch">
-            {/* Headshot */}
             <div className="w-full md:w-[45%] flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-2xl group cursor-pointer relative">
                 <img
@@ -103,13 +88,11 @@ const About: React.FC<AboutProps> = ({ data }) => {
               </div>
             </div>
 
-            {/* Bio */}
             <div className="flex-1 flex flex-col justify-center">
               <div className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-[1.85]">
                 <p>{data.personalInfo.bio}</p>
               </div>
 
-              {/* Social links */}
               <div className="mt-8 flex items-center gap-5">
                 <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                   <Linkedin size={20} />
@@ -125,9 +108,9 @@ const About: React.FC<AboutProps> = ({ data }) => {
           {/* Scroll indicator */}
           <div className="flex justify-center mt-12 md:mt-16">
             <button
-              onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('pub-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="scroll-indicator text-gray-300 dark:text-gray-600 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
-              aria-label="Scroll to Journey"
+              aria-label="Scroll to Publications"
             >
               <ChevronDown size={28} />
             </button>
@@ -135,105 +118,207 @@ const About: React.FC<AboutProps> = ({ data }) => {
         </div>
       </section>
 
-      {/* Journey Timeline */}
-      <section id="journey" ref={journeyRef} className="snap-section scroll-section min-h-screen bg-gray-50/80 dark:bg-gray-900/80 py-20 md:py-28">
+      {/* Publications Carousel */}
+      <section id="pub-section" ref={researchRef} className="snap-section scroll-section min-h-screen bg-gray-50/80 dark:bg-gray-900/80 py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">
-            My Journey
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-10 text-center">
+            Publications
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-16 max-w-xl mx-auto">
-            A timeline of where I've been and what I've built along the way.
-          </p>
 
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-[2.15rem] md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700 md:-translate-x-px" />
+          {(() => {
+            const pubs = data.research.filter(r => r.status === 'publication');
+            const bookCards = data.books.map(b => ({ type: 'book' as const, ...b }));
+            const pubCards = pubs.map(p => ({ type: 'paper' as const, ...p }));
+            const allCards = [...pubCards, ...bookCards];
+            const doubled = [...allCards, ...allCards];
+            return (
+              <div className="relative group/carousel">
+                {/* Left Arrow */}
+                <button
+                  onClick={() => researchCarousel.scroll('left')}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                {/* Right Arrow */}
+                <button
+                  onClick={() => researchCarousel.scroll('right')}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
+                  aria-label="Next"
+                >
+                  <ChevronRight size={20} />
+                </button>
 
-            <div className="space-y-12 md:space-y-16">
-              {journeyItems.map((item, index) => {
-                const isLeft = index % 2 === 0;
-                const Icon = getInstitutionIcon(item.place);
-                const logo = getInstitutionLogo(item.place);
-                return (
-                  <div key={index} className="relative flex items-start md:items-center">
-                    {/* Icon */}
-                    <div className="absolute left-6 md:left-1/2 -translate-x-1/2 mt-0.5 md:mt-0 z-10 w-9 h-9 rounded-full bg-teal-600 dark:bg-teal-500 ring-4 ring-white dark:ring-gray-950 flex items-center justify-center">
-                      <Icon size={16} className="text-white" />
-                    </div>
-
-                    {/* Content */}
-                    <div className={`ml-16 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:ml-auto'}`}>
-                      <div className={`flex items-center gap-2.5 mb-3 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                        <span className="inline-block text-xs font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950 px-2.5 py-1 rounded-full">
-                          {item.year}
-                        </span>
-                        {logo && (
-                          <img src={logo.src} alt={item.place} className="h-8 w-auto object-contain mix-blend-multiply dark:brightness-90" />
-                        )}
+                <div
+                  ref={researchCarousel.scrollRef}
+                  className="overflow-hidden"
+                  onMouseEnter={() => researchCarousel.setPaused(true)}
+                  onMouseLeave={() => researchCarousel.setPaused(false)}
+                >
+                  <div
+                    className="flex gap-5"
+                    style={{
+                      animation: `marquee-left ${allCards.length * 8}s linear infinite`,
+                      animationPlayState: researchCarousel.paused ? 'paused' : 'running',
+                      width: 'max-content',
+                    }}
+                  >
+                    {doubled.map((card, i) => (
+                      <div key={`${card.id}-${i}`} className="flex-shrink-0 w-[20rem] md:w-[24rem] lg:w-[28rem]">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.04] h-full">
+                          <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
+                            {card.image ? (
+                              <img src={card.image} alt={card.title} className="w-full h-full object-cover transition-transform duration-500" />
+                            ) : (
+                              <div className="flex flex-col items-center gap-2 text-gray-300 dark:text-gray-500">
+                                <ImageIcon size={28} />
+                                <span className="text-xs">{card.type === 'book' ? 'Book Cover' : 'Cover Image'}</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+                                card.type === 'book'
+                                  ? 'text-amber-700/80 dark:text-amber-400/80 bg-amber-50 dark:bg-amber-950'
+                                  : 'text-teal-700/80 dark:text-teal-400/80 bg-teal-50 dark:bg-teal-950'
+                              }`}>
+                                {card.type === 'book' ? 'Book' : card.category}
+                              </span>
+                              <span className="text-[11px] text-gray-400 dark:text-gray-500">
+                                {card.date}
+                              </span>
+                            </div>
+                            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-2 leading-snug mb-1.5">
+                              {card.title}
+                            </h3>
+                            {card.type === 'paper' ? (
+                              <>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                                  {card.authors}
+                                </p>
+                                {card.journal && (
+                                  <p className="text-xs text-gray-400 dark:text-gray-500 italic">{card.journal}</p>
+                                )}
+                              </>
+                            ) : (
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                                {card.publisher}
+                              </p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">{item.title}</h3>
-                      <p className="text-sm text-teal-700/80 dark:text-teal-400/80 font-medium mb-1">{item.place}</p>
-                      {item.description && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
-                      )}
-                    </div>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          <div className="text-center mt-8">
+            <Link to="/research" className="text-sm text-teal-700 dark:text-teal-400 hover:underline font-medium">
+              View all research &rarr;
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Research — narrative style */}
-      <section ref={researchRef} className="snap-section scroll-section min-h-screen py-20 md:py-28">
-        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-16">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">
-            Research
+      {/* Blog Posts */}
+      <section ref={blogRef} className="snap-section scroll-section min-h-[60vh] bg-gray-50/80 dark:bg-gray-900/80 py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-10 text-center">
+            Recent Posts
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-16 max-w-xl mx-auto">
-            My work explores entrepreneurial decision-making, technology innovation, and AI applications in research.
-          </p>
 
-          {/* Publications */}
-          <div className="mb-14">
-            <h3 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-6">Publications</h3>
-            <div className="space-y-6">
-              {publications.map((p) => (
-                <div key={p.id} className="group">
-                  <h4 className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors leading-relaxed">
-                    {p.title}
-                  </h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    {p.authors} &middot; <em>{p.journal}</em>, {p.date}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {posts.length === 0 ? (
+            <p className="text-center text-gray-400 dark:text-gray-500 italic">No posts yet.</p>
+          ) : (
+            <div className="relative group/carousel">
+              {/* Left Arrow */}
+              <button
+                onClick={() => blogCarousel.scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
+                aria-label="Previous"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              {/* Right Arrow */}
+              <button
+                onClick={() => blogCarousel.scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
+                aria-label="Next"
+              >
+                <ChevronRight size={20} />
+              </button>
 
-          {/* Working Papers */}
-          <div>
-            <h3 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-6">Under Review & In Progress</h3>
-            <div className="space-y-6">
-              {workingPapers.map((p) => (
-                <div key={p.id} className="group">
-                  <h4 className="text-base font-medium text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors leading-relaxed">
-                    {p.title}
-                  </h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    {p.authors}
-                    {p.journal && <> &middot; <em>{p.journal}</em></>}
-                    <span className="ml-2 text-[11px] text-teal-700/70 dark:text-teal-400/70 bg-teal-50 dark:bg-teal-950 px-2 py-0.5 rounded-full font-medium">
-                      {p.status === '2nd_r&r' ? '2nd R&R' : p.status.replace(/_/g, ' ')}
-                    </span>
-                  </p>
+              <div
+                ref={blogCarousel.scrollRef}
+                className="overflow-hidden"
+                onMouseEnter={() => blogCarousel.setPaused(true)}
+                onMouseLeave={() => blogCarousel.setPaused(false)}
+              >
+                <div
+                  className="flex gap-5"
+                  style={{
+                    animation: `marquee-left ${Math.max(posts.length, 3) * 6}s linear infinite`,
+                    animationPlayState: blogCarousel.paused ? 'paused' : 'running',
+                    width: 'max-content',
+                  }}
+                >
+                  {[...posts, ...posts].map((post, i) => (
+                    <Link
+                      key={`${post.slug}-${i}`}
+                      to={`/blog/${post.slug}`}
+                      className="flex-shrink-0 w-[20rem] md:w-[24rem] lg:w-[28rem]"
+                    >
+                      <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.04] h-full group">
+                        <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
+                          {post.image ? (
+                            <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500" />
+                          ) : (
+                            <div className="flex flex-col items-center gap-2 text-gray-300 dark:text-gray-500">
+                              <ImageIcon size={28} />
+                              <span className="text-xs">Thumbnail</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <div className="flex gap-2 mb-2 flex-wrap">
+                            {post.tags.map((tag) => (
+                              <span key={tag} className="text-[11px] text-teal-700/80 dark:text-teal-400/80 px-2 py-0.5 bg-teal-50 dark:bg-teal-950 rounded-full font-medium">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors line-clamp-2 leading-snug mb-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 mb-2">
+                            {post.description}
+                          </p>
+                          <div className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                            <Calendar size={12} />
+                            <span>{post.date}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
+          )}
+
+          <div className="text-center mt-8">
+            <Link to="/blog" className="text-sm text-teal-700 dark:text-teal-400 hover:underline font-medium">
+              View all posts &rarr;
+            </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

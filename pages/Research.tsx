@@ -15,9 +15,6 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 md:py-24">
       <div className="mb-16 welcome-fade">
         <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100 mb-4">Research</h1>
-        <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed max-w-2xl">
-          My research examines entrepreneurial decision-making, technology innovation, and the application of AI in research methodology.
-        </p>
       </div>
 
       {/* Publications */}

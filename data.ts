@@ -9,9 +9,10 @@ import { CMSData } from './types';
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
     name: "Haejun Jung",
+    nameKo: "정해준",
     role: "Ph.D. Candidate @ KAIST",
     email: "haejunjung@kaist.ac.kr",
-    bio: "Hello! I'm Haejun, a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of \"Learn to give,\" I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for stopping by!",
+    bio: "Hello! I'm Haejun (\uC815\uD574\uC900), a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of \"Learn to give,\" I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for visiting!",
     headshot: "/my_picture.jpeg",
     linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
@@ -27,6 +28,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       category: "Innovation",
       date: "2022",
       status: "publication",
+      image: "/technovation.png",
       link: "#"
     },
     {
@@ -37,6 +39,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       category: "Policy",
       date: "2019",
       status: "publication",
+      image: "/innovation_studies_regulation.png",
       link: "#"
     },
     {
@@ -47,6 +50,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       category: "Economics",
       date: "2019",
       status: "publication",
+      image: "/innovation_studies_patent.png",
       link: "#"
     },
     {
@@ -85,6 +89,17 @@ export const INITIAL_CMS_DATA: CMSData = {
       date: "2025",
       status: "in_preparation",
       link: "#"
+    }
+  ],
+
+  books: [
+    {
+      id: "b1",
+      title: "된다! AI 챗봇만들기",
+      publisher: "이지스퍼블리싱",
+      date: "March 2026",
+      description: "A practical guide to building AI chatbots.",
+      image: "/book.png",
     }
   ],
 

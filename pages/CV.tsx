@@ -1,7 +1,17 @@
 
 import React, { useState } from 'react';
-import { Briefcase, GraduationCap, Calendar, Download, ChevronDown, ChevronUp } from 'lucide-react';
+import { GraduationCap, TrendingUp, Rocket, Download, ChevronDown, ChevronUp, type LucideIcon } from 'lucide-react';
 import { CMSData } from '../types';
+
+function getInstitutionIcon(place: string): LucideIcon {
+  const p = place.toLowerCase();
+  if (p.includes('kaist')) return GraduationCap;
+  if (p.includes('hgu') || p.includes('handong')) return GraduationCap;
+  if (p.includes('mit') || p.includes('massachusetts')) return GraduationCap;
+  if (p.includes('flat') || p.includes('music')) return Rocket;
+  if (p.includes('bluepoint')) return TrendingUp;
+  return GraduationCap;
+}
 
 interface CVProps {
   data: CMSData;
@@ -10,12 +20,28 @@ interface CVProps {
 const CV: React.FC<CVProps> = ({ data }) => {
   const [showPdf, setShowPdf] = useState(false);
 
+  const journeyItems = [
+    ...data.cv.education.map(e => ({
+      year: e.period.split('-')[0].trim().replace('–', '').trim(),
+      title: e.title,
+      place: e.institution,
+      description: e.description,
+      type: 'education' as const,
+    })),
+    ...data.cv.experience.map(e => ({
+      year: e.period.split('-')[0].trim().replace('–', '').trim(),
+      title: e.title,
+      place: e.institution,
+      description: e.description,
+      type: 'experience' as const,
+    })),
+  ].sort((a, b) => parseInt(b.year) - parseInt(a.year));
+
   return (
     <div className="max-w-4xl mx-auto px-6 sm:px-8 py-16 md:py-24">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100 mb-2">Curriculum Vitae</h1>
-          <p className="text-gray-500 dark:text-gray-400 text-sm">Education and professional experience.</p>
         </div>
         <div className="flex gap-3">
           <button
@@ -46,57 +72,44 @@ const CV: React.FC<CVProps> = ({ data }) => {
         </div>
       )}
 
-      {/* Experience Section */}
-      <section className="mb-16 welcome-fade">
-        <div className="flex items-center space-x-3 mb-8">
-          <Briefcase className="text-teal-700 dark:text-teal-400" size={18} />
-          <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold">Experience</h2>
-        </div>
+      {/* Journey Timeline */}
+      <section className="welcome-fade">
+        <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-4 text-center">
+          My Journey
+        </h2>
 
-        <div className="space-y-10">
-          {data.cv.experience.map((item) => (
-            <div key={item.id} className="group pl-6 border-l-2 border-gray-100 dark:border-gray-800 hover:border-teal-700/40 dark:hover:border-teal-400/40 transition-colors">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-1.5">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
-                <span className="text-gray-400 dark:text-gray-500 text-xs mt-1 md:mt-0 flex items-center flex-shrink-0">
-                  <Calendar size={12} className="mr-1.5" /> {item.period}
-                </span>
-              </div>
-              <p className="text-teal-700 dark:text-teal-400 text-sm font-medium mb-2">{item.institution}</p>
-              {item.description && (
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-[2.15rem] md:left-1/2 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700 md:-translate-x-px" />
 
-      {/* Education Section */}
-      <section className="welcome-fade" style={{ animationDelay: '0.1s' }}>
-        <div className="flex items-center space-x-3 mb-8">
-          <GraduationCap className="text-teal-700 dark:text-teal-400" size={18} />
-          <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold">Education</h2>
-        </div>
+          <div className="space-y-12 md:space-y-16">
+            {journeyItems.map((item, index) => {
+              const isLeft = index % 2 === 0;
+              const Icon = getInstitutionIcon(item.place);
+              return (
+                <div key={index} className="relative flex items-start md:items-center">
+                  {/* Icon */}
+                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 mt-0.5 md:mt-0 z-10 w-9 h-9 rounded-full bg-teal-600 dark:bg-teal-500 ring-4 ring-white dark:ring-gray-950 flex items-center justify-center">
+                    <Icon size={16} className="text-white" />
+                  </div>
 
-        <div className="space-y-10">
-          {data.cv.education.map((item) => (
-            <div key={item.id} className="group pl-6 border-l-2 border-gray-100 dark:border-gray-800 hover:border-teal-700/40 dark:hover:border-teal-400/40 transition-colors">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-1.5">
-                <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
-                <span className="text-gray-400 dark:text-gray-500 text-xs mt-1 md:mt-0 flex items-center flex-shrink-0">
-                  <Calendar size={12} className="mr-1.5" /> {item.period}
-                </span>
-              </div>
-              <p className="text-teal-700 dark:text-teal-400 text-sm font-medium mb-2">{item.institution}</p>
-              {item.description && (
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              )}
-            </div>
-          ))}
+                  {/* Content */}
+                  <div className={`ml-16 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:ml-auto'}`}>
+                    <div className={`flex items-center gap-2.5 mb-3 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
+                      <span className="inline-block text-xs font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950 px-2.5 py-1 rounded-full">
+                        {item.year}
+                      </span>
+                    </div>
+                    <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">{item.title}</h3>
+                    <p className="text-sm text-teal-700/80 dark:text-teal-400/80 font-medium mb-1">{item.place}</p>
+                    {item.description && (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>

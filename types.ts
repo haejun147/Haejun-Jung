@@ -8,6 +8,7 @@ export interface ResearchProject {
   description?: string;
   date: string;
   link?: string;
+  image?: string;
   status: 'publication' | 'working_paper' | 'under_review' | 'in_preparation' | 'under_2nd review' | '2nd_r&r';
 }
 
@@ -35,11 +36,23 @@ export interface BlogPost {
   tags: string[];
   published: boolean;
   content: string;
+  image?: string;
+}
+
+export interface Book {
+  id: string;
+  title: string;
+  publisher: string;
+  date: string;
+  description?: string;
+  image?: string;
+  link?: string;
 }
 
 export interface CMSData {
   personalInfo: {
     name: string;
+    nameKo?: string;
     role: string;
     email: string;
     bio: string;
@@ -49,6 +62,7 @@ export interface CMSData {
     cvUrl: string;
   };
   research: ResearchProject[];
+  books: Book[];
   cv: {
     education: CVEntry[];
     experience: CVEntry[];

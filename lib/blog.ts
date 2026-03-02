@@ -40,6 +40,7 @@ function toPost(slug: string, raw: string): BlogPost {
     tags: parseTags(meta.tags),
     published: meta.published !== 'false',
     content,
+    image: meta.image || undefined,
   };
 }
 
