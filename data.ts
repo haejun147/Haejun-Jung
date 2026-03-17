@@ -99,7 +99,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       publisher: "이지스퍼블리싱",
       date: "March 2026",
       description: "A practical guide to building AI chatbots.",
-      image: "/book.png",
+      image: "/book_updated.png",
     }
   ],
 

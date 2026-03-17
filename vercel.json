@@ -5,6 +5,6 @@
     { "source": "/feed.xml", "destination": "/rss.xml", "statusCode": 301 }
   ],
   "rewrites": [
-    { "source": "/((?!assets/|rss\\.xml|sitemap\\.xml|favicon\\.webp|.*\\.pdf|.*\\.jpeg|.*\\.png).*)", "destination": "/index.html" }
+    { "source": "/((?!assets/|api/|rss\\.xml|sitemap\\.xml|favicon\\.webp|.*\\.pdf|.*\\.jpeg|.*\\.png).*)", "destination": "/index.html" }
   ]
 }
