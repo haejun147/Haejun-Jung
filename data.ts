@@ -100,6 +100,8 @@ export const INITIAL_CMS_DATA: CMSData = {
       date: "March 2026",
       description: "A practical guide to building AI chatbots.",
       image: "/book_updated.png",
+      link: "https://www.yes24.com/product/goods/182958115",
+      newsLink: "https://aimatters.co.kr/news-report/ai-news/39513/",
     }
   ],
 

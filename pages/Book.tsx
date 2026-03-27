@@ -50,16 +50,29 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
                   {book.description}
                 </p>
               )}
-              {book.link && (
-                <a
-                  href={book.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-teal-700 dark:text-teal-400 hover:underline"
-                >
-                  Learn more &rarr;
-                </a>
-              )}
+              <div className="flex flex-wrap gap-3">
+                {book.link && (
+                  <a
+                    href={book.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors"
+                  >
+                    <BookOpen size={16} />
+                    Purchase Book
+                  </a>
+                )}
+                {book.newsLink && (
+                  <a
+                    href={book.newsLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    📰 Press Coverage
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

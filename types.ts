@@ -47,6 +47,7 @@ export interface Book {
   description?: string;
   image?: string;
   link?: string;
+  newsLink?: string;
 }
 
 export interface CMSData {
