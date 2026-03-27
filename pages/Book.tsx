@@ -58,7 +58,6 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors"
                   >
-                    <BookOpen size={16} />
                     Purchase Book
                   </a>
                 )}
@@ -69,7 +68,7 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
-                    📰 Press Coverage
+                    Press Coverage
                   </a>
                 )}
               </div>
