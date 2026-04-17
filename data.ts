@@ -64,19 +64,19 @@ export const INITIAL_CMS_DATA: CMSData = {
       link: "#"
     },
     {
-      id: "w2",
-      title: "Does Media Exposure Matter for Early-Stage Startup Financing? Evidence from Korean Startups",
-      authors: "Jung, H., Kim, G., Hwang, J.",
-      category: "Entrepreneurship",
-      date: "2025",
-      status: "under_review",
-      link: "#"
-    },
-    {
       id: "w3",
       title: "Predicting Consumer Preferences for New Product Development Using Large Language Models",
       authors: "Jung, H., Lee, J., Lee, S., Chung, D.",
       category: "AI",
+      date: "2025",
+      status: "1st_r&r",
+      link: "#"
+    },
+    {
+      id: "w2",
+      title: "Does Media Exposure Matter for Early-Stage Startup Financing? Evidence from Korean Startups",
+      authors: "Jung, H., Kim, G., Hwang, J.",
+      category: "Entrepreneurship",
       date: "2025",
       status: "under_review",
       link: "#"

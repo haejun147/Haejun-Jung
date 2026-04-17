@@ -19,7 +19,7 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
 
       {/* Publications */}
       <section className="mb-20 welcome-fade" style={{ animationDelay: '0.1s' }}>
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-8">Publications</h2>
+        <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-gray-100 mb-8 pb-3 border-b-2 border-teal-700 dark:border-teal-400">Publications</h2>
         <div className="space-y-8">
           {publications.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No publications listed yet.</p>}
           {publications.map((project) => (
@@ -45,7 +45,7 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
 
       {/* Working Papers */}
       <section className="welcome-fade" style={{ animationDelay: '0.2s' }}>
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold mb-8">Under Review & In Progress</h2>
+        <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-gray-100 mb-8 pb-3 border-b-2 border-teal-700 dark:border-teal-400">Under Review & In Progress</h2>
         <div className="space-y-8">
           {workingPapers.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No working papers listed yet.</p>}
           {workingPapers.map((project) => (
@@ -65,7 +65,7 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
                 <div className="flex items-center gap-3">
                   <span className="italic">{project.journal || 'Working Paper'}</span>
                   <span className="text-[11px] text-teal-700/80 dark:text-teal-400/80 px-2 py-0.5 border border-teal-700/20 dark:border-teal-400/20 rounded-full bg-teal-50 dark:bg-teal-950">
-                    {project.status === '2nd_r&r' ? '2nd R&R' : project.status.replace(/_/g, ' ')}
+                    {project.status === '2nd_r&r' ? '2nd R&R' : project.status === '1st_r&r' ? '1st R&R' : project.status.replace(/_/g, ' ')}
                   </span>
                 </div>
               </div>
