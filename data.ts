@@ -13,7 +13,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     role: "Ph.D. Candidate @ KAIST",
     email: "haejunjung@kaist.ac.kr",
     bio: "Hello! I'm Haejun (\uC815\uD574\uC900), a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of \"Learn to give,\" I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for visiting!",
-    headshot: "/my_picture.jpeg",
+    headshot: "/my_picture.png",
     linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
     cvUrl: "/CV_Haejun.pdf"
@@ -69,7 +69,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       authors: "Jung, H., Lee, J., Lee, S., Chung, D.",
       category: "AI",
       date: "2025",
-      status: "1st_r&r",
+      status: "2nd_review",
       link: "#"
     },
     {
