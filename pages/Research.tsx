@@ -45,9 +45,9 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
 
       {/* Working Papers */}
       <section className="welcome-fade" style={{ animationDelay: '0.2s' }}>
-        <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-gray-100 mb-8 pb-3 border-b-2 border-teal-700 dark:border-teal-400">Under Review & In Progress</h2>
+        <h2 className="text-lg font-display font-semibold text-gray-900 dark:text-gray-100 mb-8 pb-3 border-b-2 border-teal-700 dark:border-teal-400">Under Review</h2>
         <div className="space-y-8">
-          {workingPapers.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No working papers listed yet.</p>}
+          {workingPapers.length === 0 && <p className="text-gray-400 dark:text-gray-500 italic">No manuscripts under review.</p>}
           {workingPapers.map((project) => (
             <div key={project.id} className="group pb-8 border-b border-gray-100 dark:border-gray-800 last:border-0">
               <div className="flex justify-between items-start gap-4">
@@ -62,11 +62,8 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
               </div>
               <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 space-y-0.5">
                 <div>{project.authors}</div>
-                <div className="flex items-center gap-3">
-                  <span className="italic">{project.journal || 'Working Paper'}</span>
-                  <span className="text-[11px] text-teal-700/80 dark:text-teal-400/80 px-2 py-0.5 border border-teal-700/20 dark:border-teal-400/20 rounded-full bg-teal-50 dark:bg-teal-950">
-                    {project.status === '2nd_r&r' ? '2nd R&R' : project.status === '1st_r&r' ? '1st R&R' : project.status.replace(/_/g, ' ')}
-                  </span>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  {project.status === '2nd_r&r' ? '2nd R&R' : project.status === '1st_r&r' ? '1st R&R' : project.status === '2nd_review' ? '2nd Review' : project.status === '1st_review' ? '1st Review' : project.status === 'under_review' ? 'Under Review' : project.status.replace(/_/g, ' ')}
                 </div>
               </div>
             </div>

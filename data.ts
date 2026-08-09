@@ -80,15 +80,6 @@ export const INITIAL_CMS_DATA: CMSData = {
       date: "2025",
       status: "under_review",
       link: "#"
-    },
-    {
-      id: "w4",
-      title: "Exploring the Potential and Limits of Large Language Models in Entrepreneurship Survey Research",
-      authors: "Jung, H., Kim, W.",
-      category: "LLM",
-      date: "2025",
-      status: "in_preparation",
-      link: "#"
     }
   ],
 
