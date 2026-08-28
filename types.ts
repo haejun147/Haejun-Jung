@@ -9,7 +9,7 @@ export interface ResearchProject {
   date: string;
   link?: string;
   image?: string;
-  status: 'publication' | 'working_paper' | 'under_review' | 'in_preparation' | '1st_review' | '2nd_review' | '1st_r&r' | '2nd_r&r';
+  status: 'publication' | 'working_paper' | 'under_review' | 'in_preparation' | '1st_review' | '2nd_review' | '3rd_review' | '2nd_revision' | '1st_r&r' | '2nd_r&r';
 }
 
 export interface CVEntry {

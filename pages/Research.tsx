@@ -63,7 +63,7 @@ const Research: React.FC<ResearchProps> = ({ data }) => {
               <div className="mt-2 text-sm text-gray-500 dark:text-gray-400 space-y-0.5">
                 <div>{project.authors}</div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {project.status === '2nd_r&r' ? '2nd R&R' : project.status === '1st_r&r' ? '1st R&R' : project.status === '2nd_review' ? '2nd Review' : project.status === '1st_review' ? '1st Review' : project.status === 'under_review' ? 'Under Review' : project.status.replace(/_/g, ' ')}
+                  {project.status === '2nd_r&r' ? '2nd R&R' : project.status === '1st_r&r' ? '1st R&R' : project.status === '2nd_revision' ? '2nd Revision' : project.status === '3rd_review' ? '3rd Review' : project.status === '2nd_review' ? '2nd Review' : project.status === '1st_review' ? '1st Review' : project.status === 'under_review' ? 'Under Review' : project.status.replace(/_/g, ' ')}
                 </div>
               </div>
             </div>

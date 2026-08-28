@@ -60,7 +60,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       journal: "Strategic Entrepreneurship Journal (FT-50)",
       category: "Entrepreneurship",
       date: "2024",
-      status: "2nd_r&r",
+      status: "3rd_review",
       link: "#"
     },
     {
@@ -69,7 +69,7 @@ export const INITIAL_CMS_DATA: CMSData = {
       authors: "Jung, H., Lee, J., Lee, S., Chung, D.",
       category: "AI",
       date: "2025",
-      status: "2nd_review",
+      status: "2nd_revision",
       link: "#"
     },
     {
