@@ -19,69 +19,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     cvUrl: "/CV_Haejun.pdf"
   },
 
-  research: [
-    {
-      id: "p1",
-      title: "Investigating the Relationship of High-Tech Entrepreneurship and Innovation Efficacy: The Moderating Role of Absorptive Capacity",
-      authors: "Chung, D., Jung, H., Lee, Y.",
-      journal: "Technovation",
-      category: "Innovation",
-      date: "2022",
-      status: "publication",
-      image: "/technovation.png",
-      link: "#"
-    },
-    {
-      id: "p2",
-      title: "The Paradox of the Regulation: the Moderating Effect of the Regulatory Environment on the Relationship of Technological Entrepreneurship on Nation-level Innovation",
-      authors: "Jung, H., Lee, C., Chung, D.",
-      journal: "Innovation Studies",
-      category: "Policy",
-      date: "2019",
-      status: "publication",
-      image: "/innovation_studies_regulation.png",
-      link: "#"
-    },
-    {
-      id: "p3",
-      title: "The Effect of Intellectual Property-Based Startups on Employment",
-      authors: "Jung, H., Kim, Y., Chung, D.",
-      journal: "Innovation Studies",
-      category: "Economics",
-      date: "2019",
-      status: "publication",
-      image: "/innovation_studies_patent.png",
-      link: "#"
-    },
-    {
-      id: "w1",
-      title: "Unpacking the Entrepreneurial Process after Failure: The Role of Attribution and Behavioral Responses to Entrepreneurial Failure",
-      authors: "Kim, D., Jung, H., Chatterji, A., Kim, W., Cho, S.",
-      journal: "Strategic Entrepreneurship Journal (FT-50)",
-      category: "Entrepreneurship",
-      date: "2024",
-      status: "3rd_review",
-      link: "#"
-    },
-    {
-      id: "w3",
-      title: "Predicting Consumer Preferences for New Product Development Using Large Language Models",
-      authors: "Jung, H., Lee, J., Lee, S., Chung, D.",
-      category: "AI",
-      date: "2025",
-      status: "2nd_revision",
-      link: "#"
-    },
-    {
-      id: "w2",
-      title: "Does Media Exposure Matter for Early-Stage Startup Financing? Evidence from Korean Startups",
-      authors: "Jung, H., Kim, G., Hwang, J.",
-      category: "Entrepreneurship",
-      date: "2025",
-      status: "under_review",
-      link: "#"
-    }
-  ],
+  research: [],
 
   books: [
     {

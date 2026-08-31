@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import About from './pages/About';
-import Research from './pages/Research';
 import CV from './pages/CV';
 import BookPage from './pages/Book';
 import { INITIAL_CMS_DATA } from './data';
@@ -19,7 +18,6 @@ const App: React.FC = () => {
         <Layout data={data}>
           <Routes>
             <Route path="/" element={<About data={data} />} />
-            <Route path="/research" element={<Research data={data} />} />
             <Route path="/book" element={<BookPage data={data} />} />
             <Route path="/cv" element={<CV data={data} />} />
             <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,59 +1,13 @@
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { Linkedin, Mail, ChevronDown, ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react';
+import React from 'react';
+import { Linkedin, Mail } from 'lucide-react';
 import { CMSData } from '../types';
-
-function useScrollReveal<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('scroll-visible');
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.12 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
-function useCarousel(cardWidth: number) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [paused, setPaused] = useState(false);
-  const pauseTimeout = useRef<ReturnType<typeof setTimeout>>();
-
-  const scroll = useCallback((direction: 'left' | 'right') => {
-    const el = scrollRef.current;
-    if (!el) return;
-    // Pause auto-scroll temporarily when user clicks arrows
-    setPaused(true);
-    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
-    pauseTimeout.current = setTimeout(() => setPaused(false), 3000);
-
-    const gap = 20; // gap-5 = 1.25rem = 20px
-    const shift = cardWidth + gap;
-    el.scrollBy({ left: direction === 'right' ? shift : -shift, behavior: 'smooth' });
-  }, [cardWidth]);
-
-  return { scrollRef, paused, setPaused, scroll };
-}
 
 interface AboutProps {
   data: CMSData;
 }
 
 const About: React.FC<AboutProps> = ({ data }) => {
-  const researchCarousel = useCarousel(384); // ~24rem
-
-  const researchRef = useScrollReveal<HTMLElement>();
-
   return (
     <div className="snap-container">
       {/* Hero Section */}
@@ -100,126 +54,8 @@ const About: React.FC<AboutProps> = ({ data }) => {
           </div>
         </div>
 
-          {/* Scroll indicator */}
-          <div className="flex justify-center mt-12 md:mt-16">
-            <button
-              onClick={() => document.getElementById('pub-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="scroll-indicator text-gray-300 dark:text-gray-600 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
-              aria-label="Scroll to Publications"
-            >
-              <ChevronDown size={28} />
-            </button>
-          </div>
         </div>
       </section>
-
-      {/* Publications Carousel */}
-      <section id="pub-section" ref={researchRef} className="snap-section scroll-section min-h-screen bg-gray-50/80 dark:bg-gray-900/80 py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-10 text-center">
-            Publications
-          </h2>
-
-          {(() => {
-            const pubs = data.research.filter(r => r.status === 'publication');
-            const bookCards = data.books.map(b => ({ type: 'book' as const, ...b }));
-            const pubCards = pubs.map(p => ({ type: 'paper' as const, ...p }));
-            const allCards = [...pubCards, ...bookCards];
-            const doubled = [...allCards, ...allCards];
-            return (
-              <div className="relative group/carousel">
-                {/* Left Arrow */}
-                <button
-                  onClick={() => researchCarousel.scroll('left')}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
-                  aria-label="Previous"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                {/* Right Arrow */}
-                <button
-                  onClick={() => researchCarousel.scroll('right')}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-20 w-10 h-10 rounded-full bg-white/90 dark:bg-gray-800/90 shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-teal-700 dark:hover:text-teal-400 hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100"
-                  aria-label="Next"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-                <div
-                  ref={researchCarousel.scrollRef}
-                  className="overflow-hidden"
-                  onMouseEnter={() => researchCarousel.setPaused(true)}
-                  onMouseLeave={() => researchCarousel.setPaused(false)}
-                >
-                  <div
-                    className="flex gap-5"
-                    style={{
-                      animation: `marquee-left ${allCards.length * 8}s linear infinite`,
-                      animationPlayState: researchCarousel.paused ? 'paused' : 'running',
-                      width: 'max-content',
-                    }}
-                  >
-                    {doubled.map((card, i) => (
-                      <div key={`${card.id}-${i}`} className="flex-shrink-0 w-[20rem] md:w-[24rem] lg:w-[28rem]">
-                        <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-[1.04] h-full">
-                          <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center overflow-hidden">
-                            {card.image ? (
-                              <img src={card.image} alt={card.title} className="w-full h-full object-cover transition-transform duration-500" />
-                            ) : (
-                              <div className="flex flex-col items-center gap-2 text-gray-300 dark:text-gray-500">
-                                <ImageIcon size={28} />
-                                <span className="text-xs">{card.type === 'book' ? 'Book Cover' : 'Cover Image'}</span>
-                              </div>
-                            )}
-                          </div>
-                          <div className="p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
-                                card.type === 'book'
-                                  ? 'text-amber-700/80 dark:text-amber-400/80 bg-amber-50 dark:bg-amber-950'
-                                  : 'text-teal-700/80 dark:text-teal-400/80 bg-teal-50 dark:bg-teal-950'
-                              }`}>
-                                {card.type === 'book' ? 'Book' : card.category}
-                              </span>
-                              <span className="text-[11px] text-gray-400 dark:text-gray-500">
-                                {card.date}
-                              </span>
-                            </div>
-                            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 line-clamp-2 leading-snug mb-1.5">
-                              {card.title}
-                            </h3>
-                            {card.type === 'paper' ? (
-                              <>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                                  {card.authors}
-                                </p>
-                                {card.journal && (
-                                  <p className="text-xs text-gray-400 dark:text-gray-500 italic">{card.journal}</p>
-                                )}
-                              </>
-                            ) : (
-                              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                                {card.publisher}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
-
-          <div className="text-center mt-8">
-            <Link to="/research" className="text-sm text-teal-700 dark:text-teal-400 hover:underline font-medium">
-              View all research &rarr;
-            </Link>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 };

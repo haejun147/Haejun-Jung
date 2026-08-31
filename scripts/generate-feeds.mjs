@@ -3,7 +3,7 @@ import { join, resolve } from 'path';
 
 const SITE_URL = 'https://www.haejunjung.com';
 const SITE_TITLE = 'Haejun Jung';
-const SITE_DESC = 'Ph.D. Candidate at KAIST — research on entrepreneurship, technology innovation, and AI.';
+const SITE_DESC = 'Personal website of Haejun Jung, Ph.D. Candidate at KAIST.';
 
 const root = resolve(import.meta.dirname, '..');
 const blogDir = join(root, 'content', 'blog');
@@ -36,7 +36,7 @@ function getPosts() {
 }
 
 function generateSitemap(posts) {
-  const staticPages = ['/', '/research', '/blog', '/cv'];
+  const staticPages = ['/', '/blog', '/cv'];
   const now = new Date().toISOString();
 
   const urls = staticPages

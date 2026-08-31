@@ -11,7 +11,7 @@ interface SEOProps {
 
 const SITE_NAME = 'Haejun Jung';
 const BASE_URL = 'https://www.haejunjung.com';
-const DEFAULT_DESC = 'Ph.D. Candidate at KAIST — research on entrepreneurship, technology innovation, and AI.';
+const DEFAULT_DESC = 'Personal website of Haejun Jung, Ph.D. Candidate at KAIST.';
 
 function setMeta(property: string, content: string) {
   let el = document.querySelector(`meta[property="${property}"]`) || document.querySelector(`meta[name="${property}"]`);
