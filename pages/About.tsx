@@ -11,20 +11,29 @@ const About: React.FC<AboutProps> = ({ data }) => {
   return (
     <div className="snap-container">
       {/* Hero Section */}
-      <section className="snap-section min-h-[calc(100vh-6rem)] flex flex-col justify-center">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 py-16 md:py-20">
-        <div className="welcome-fade">
-          {/* Name + Role */}
-          <div className="text-center mb-14 md:mb-20">
-            <h1 className="text-4xl md:text-[3.4rem] font-display font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
-              {data.personalInfo.name}
-            </h1>
-            <p className="text-lg md:text-xl text-teal-700 dark:text-teal-400 font-medium">
-              {data.personalInfo.role}
-            </p>
+      <section aria-labelledby="about-name" className="snap-section pt-8 md:pt-12">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 welcome-fade">
+          <div className="overflow-hidden rounded-2xl md:rounded-3xl bg-[#FAF9F6] dark:ring-1 dark:ring-white/10">
+            <img
+              src="/journey-hero.png"
+              alt="A watercolor journey through Qingdao, Pohang, Daejeon, Seoul, and Boston, with a naval ship representing Navy service."
+              className="block w-full h-auto dark:brightness-90"
+              fetchPriority="high"
+            />
           </div>
 
-          {/* Photo + Bio */}
+          {/* Name */}
+          <div className="text-center pt-8 md:pt-10 pb-10 md:pb-14">
+            <h1 id="about-name" className="text-4xl md:text-[3.4rem] font-display font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
+              {data.personalInfo.name}
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* Photo + Bio */}
+      <section aria-label="About me" className="snap-section">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16 pt-4 md:pt-8 pb-16 md:pb-24">
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-stretch">
             <div data-analytics-section="about_profile" className="w-full md:w-[32%] flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-2xl group cursor-pointer relative">
@@ -52,8 +61,6 @@ const About: React.FC<AboutProps> = ({ data }) => {
               </div>
             </div>
           </div>
-        </div>
-
         </div>
       </section>
     </div>

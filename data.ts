@@ -8,11 +8,11 @@ import { CMSData } from './types';
  */
 export const INITIAL_CMS_DATA: CMSData = {
   personalInfo: {
-    name: "Haejun Jung",
+    name: "Haejun (Jun) Jung",
     nameKo: "정해준",
     role: "Ph.D. Candidate @ KAIST",
     email: "haejunjung@kaist.ac.kr",
-    bio: "Hello! I'm Haejun (\uC815\uD574\uC900), a Ph.D. candidate at KAIST. My research examines why entrepreneurs make different decisions and how these differences shape their future behaviors. Guided by the philosophy of \"Learn to give,\" I hope to produce insights that meaningfully support both the entrepreneurial community and society more broadly. Thanks for visiting!",
+    bio: "What if the majority is wrong? I often wonder how much of what we accept as fact is truly so, and what possibilities we overlook because of beliefs we never question. Many innovations began with entrepreneurs who saw promise in ideas others dismissed. My research explores how entrepreneurs come to perceive these opportunities, why they make contrarian choices despite widespread disagreement and uncertainty, and where those choices lead them.",
     headshot: "/my_picture.png",
     linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
