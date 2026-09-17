@@ -8,6 +8,7 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <button
+      data-analytics-click={theme === 'light' ? 'theme_dark' : 'theme_light'}
       onClick={toggleTheme}
       className="p-2 rounded-lg text-gray-500 hover:text-teal-700 dark:text-gray-400 dark:hover:text-teal-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}

@@ -4,6 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, Linkedin, Mail } from 'lucide-react';
 import { CMSData } from '../types';
 import ThemeToggle from './ThemeToggle';
+import { ANALYTICS_PREFERENCES_EVENT, configuredAnalytics } from './SiteAnalytics';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
           <div className="flex justify-between h-24">
             <div className="flex items-center">
-              <Link to="/" className="text-xl font-display font-bold text-gray-900 dark:text-gray-100 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
+              <Link data-analytics-click="nav_home" to="/" className="text-xl font-display font-bold text-gray-900 dark:text-gray-100 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                 {data.personalInfo.name}
               </Link>
             </div>
@@ -36,6 +37,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
               {navItems.map((item) => (
                 <NavLink
                   key={item.name}
+                  data-analytics-click={`nav_${item.name.toLowerCase()}`}
                   to={item.path}
                   className={({ isActive }) =>
                     `text-[17px] transition-colors hover:text-teal-700 dark:hover:text-teal-400 ${
@@ -53,6 +55,8 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
             <div className="md:hidden flex items-center gap-2">
               <ThemeToggle />
               <button
+                data-analytics-click={isOpen ? "menu_close" : "menu_open"}
+                aria-label={isOpen ? "Close menu" : "Open menu"}
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
               >
@@ -69,6 +73,7 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
               {navItems.map((item) => (
                 <NavLink
                   key={item.name}
+                  data-analytics-click={`nav_${item.name.toLowerCase()}`}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
@@ -95,13 +100,18 @@ const Layout: React.FC<LayoutProps> = ({ children, data }) => {
         <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-16">
           <div className="flex flex-col items-center gap-4">
             <div className="flex space-x-5">
-              <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
+              <a data-analytics-click="footer_linkedin" href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                 <Linkedin size={18} />
               </a>
-              <a href={`mailto:${data.personalInfo.email}`} className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
+              <a data-analytics-click="footer_email" href={`mailto:${data.personalInfo.email}`} className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                 <Mail size={18} />
               </a>
             </div>
+            {configuredAnalytics && (
+              <button className="text-xs text-gray-500 dark:text-gray-400 underline" onClick={() => window.dispatchEvent(new Event(ANALYTICS_PREFERENCES_EVENT))}>
+                Analytics preferences
+              </button>
+            )}
             <div className="text-gray-400 dark:text-gray-500 text-xs">
               &copy; {new Date().getFullYear()} {data.personalInfo.name}
             </div>

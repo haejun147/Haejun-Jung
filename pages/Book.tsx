@@ -19,7 +19,7 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
         {data.books.map((book) => (
           <div key={book.id} className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
             {/* Book Cover */}
-            <div className="w-full md:w-[280px] flex-shrink-0">
+            <div data-analytics-section={`book_${book.id}_cover`} className="w-full md:w-[280px] flex-shrink-0">
               <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-700 dark:to-gray-800 rounded-xl overflow-hidden shadow-md">
                 {book.image ? (
                   <img src={book.image} alt={book.title} className="w-full h-full object-cover" />
@@ -33,7 +33,7 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
             </div>
 
             {/* Book Details */}
-            <div className="flex-1">
+            <div data-analytics-section={`book_${book.id}_details`} className="flex-1">
               <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 dark:text-gray-100 mb-3">
                 {book.title}
               </h2>
@@ -53,6 +53,7 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
               <div className="flex flex-wrap gap-3">
                 {book.link && (
                   <a
+                    data-analytics-click={`book_${book.id}_explore`}
                     href={book.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -63,6 +64,7 @@ const BookPage: React.FC<BookPageProps> = ({ data }) => {
                 )}
                 {book.newsLink && (
                   <a
+                    data-analytics-click={`book_${book.id}_press`}
                     href={book.newsLink}
                     target="_blank"
                     rel="noopener noreferrer"

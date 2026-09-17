@@ -26,7 +26,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
 
           {/* Photo + Bio */}
           <div className="flex flex-col md:flex-row gap-10 md:gap-14 items-stretch">
-            <div className="w-full md:w-[32%] flex-shrink-0">
+            <div data-analytics-section="about_profile" className="w-full md:w-[32%] flex-shrink-0">
               <div className="aspect-[3/4] overflow-hidden rounded-2xl group cursor-pointer relative">
                 <img
                   src={data.personalInfo.headshot}
@@ -37,16 +37,16 @@ const About: React.FC<AboutProps> = ({ data }) => {
               </div>
             </div>
 
-            <div className="flex-1 flex flex-col justify-center">
+            <div data-analytics-section="about_bio" className="flex-1 flex flex-col justify-center">
               <div className="text-gray-600 dark:text-gray-300 text-base md:text-lg leading-[1.85]">
                 <p>{data.personalInfo.bio}</p>
               </div>
 
               <div className="mt-8 flex items-center gap-5">
-                <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
+                <a data-analytics-click="about_linkedin" href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                   <Linkedin size={20} />
                 </a>
-                <a href={`mailto:${data.personalInfo.email}`} className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
+                <a data-analytics-click="about_email" href={`mailto:${data.personalInfo.email}`} className="text-gray-400 dark:text-gray-500 hover:text-teal-700 dark:hover:text-teal-400 transition-colors">
                   <Mail size={20} />
                 </a>
               </div>

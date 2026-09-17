@@ -4,12 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test": "node --test tests/*.test.mjs",
     "dev": "vite",
     "build": "vite build && node scripts/generate-feeds.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "lucide-react": "^0.562.0",
+    "posthog-js": "^1.433.10",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-markdown": "^10.1.0",

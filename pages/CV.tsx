@@ -18,6 +18,7 @@ const CV: React.FC<CVProps> = ({ data }) => {
         </div>
         <div className="flex gap-3">
           <button
+            data-analytics-click={showPdf ? "cv_hide_pdf" : "cv_show_pdf"}
             onClick={() => setShowPdf(!showPdf)}
             className="flex items-center px-5 py-2.5 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium tracking-wide hover:border-teal-700 dark:hover:border-teal-400 hover:text-teal-700 dark:hover:text-teal-400 transition-colors rounded-lg"
           >
@@ -25,6 +26,7 @@ const CV: React.FC<CVProps> = ({ data }) => {
             {showPdf ? <ChevronUp size={14} className="ml-1.5" /> : <ChevronDown size={14} className="ml-1.5" />}
           </button>
           <a
+            data-analytics-click="cv_download"
             href={data.personalInfo.cvUrl}
             download
             className="flex items-center px-5 py-2.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-medium tracking-wide hover:bg-teal-700 dark:hover:bg-teal-400 transition-colors rounded-lg"
@@ -36,7 +38,7 @@ const CV: React.FC<CVProps> = ({ data }) => {
 
       {/* PDF Viewer — toggle, full page width, no sidebar */}
       {showPdf && data.personalInfo.cvUrl && data.personalInfo.cvUrl !== '#' && (
-        <div className="mb-16 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden">
+        <div data-analytics-section="cv_viewer" className="mb-16 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden">
           <iframe
             src={`${data.personalInfo.cvUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
             className="w-full h-[85vh]"

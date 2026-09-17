@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
+import SiteAnalytics from './components/SiteAnalytics';
 import About from './pages/About';
 import CV from './pages/CV';
 import BookPage from './pages/Book';
@@ -15,6 +16,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <Router>
+        <SiteAnalytics />
         <Layout data={data}>
           <Routes>
             <Route path="/" element={<About data={data} />} />
