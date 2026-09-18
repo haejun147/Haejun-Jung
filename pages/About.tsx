@@ -11,19 +11,21 @@ const About: React.FC<AboutProps> = ({ data }) => {
   return (
     <div className="snap-container">
       {/* Hero Section */}
-      <section aria-labelledby="about-name" className="snap-section pt-8 md:pt-12">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 welcome-fade">
+      <section aria-labelledby="about-name" className="snap-section pt-4 md:pt-6">
+        <div className="max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 welcome-fade">
           <div className="overflow-hidden rounded-2xl md:rounded-3xl bg-[#FAF9F6] dark:ring-1 dark:ring-white/10">
             <img
               src="/journey-hero.png"
               alt="A watercolor journey through Qingdao, Pohang, Daejeon, Seoul, and Boston, with a naval ship representing Navy service."
+              width={2056}
+              height={765}
               className="block w-full h-auto dark:brightness-90"
               fetchPriority="high"
             />
           </div>
 
           {/* Name */}
-          <div className="text-center pt-8 md:pt-10 pb-10 md:pb-14">
+          <div className="text-center pt-6 md:pt-8 pb-8 md:pb-10">
             <h1 id="about-name" className="text-4xl md:text-[3.4rem] font-display font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
               {data.personalInfo.name}
             </h1>
