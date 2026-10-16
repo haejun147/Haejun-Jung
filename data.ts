@@ -16,7 +16,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     headshot: "/my_picture.png",
     linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
-    cvUrl: "/Haejun_Jung_CV_260916.pdf"
+    cvUrl: "/Haejun_Jung_CV_261016.pdf"
   },
 
   research: [],
