@@ -12,7 +12,7 @@ export const INITIAL_CMS_DATA: CMSData = {
     nameKo: "정해준",
     role: "Ph.D. Candidate @ KAIST",
     email: "haejunjung@kaist.ac.kr",
-    bio: "What if the majority is wrong? I often wonder how much of what we accept as fact is truly so, and what possibilities we overlook because of beliefs we never question. Many innovations began with entrepreneurs who saw promise in ideas others dismissed. My research explores how entrepreneurs come to perceive these opportunities, why they make contrarian choices despite widespread disagreement and uncertainty, and where those choices lead them.",
+    bio: "What if what you believe to be true isn't? I often wonder how much of what we take for granted is actually true and what opportunities we miss simply because we never question our assumptions. Many breakthroughs began with entrepreneurs who saw potential where others saw little promise. My research explores how entrepreneurs come to recognize these contrarian opportunities and what strategies help them overcome the disadvantages of pursuing them.",
     headshot: "/my_picture.png",
     linkedin: "https://www.linkedin.com/in/haejun-jung-662430208/",
     github: "https://github.com/hajunj",
