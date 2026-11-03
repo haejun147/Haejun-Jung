@@ -27,7 +27,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
           {/* Name */}
           <div className="text-center pt-6 md:pt-8 pb-8 md:pb-10">
             <h1 id="about-name" className="text-4xl md:text-[3.4rem] font-display font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
-              {data.personalInfo.name}
+              Haejun Jung (丁海俊)
             </h1>
           </div>
         </div>
